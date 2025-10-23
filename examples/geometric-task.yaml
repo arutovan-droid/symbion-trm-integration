@@ -1,1 +1,47 @@
+# Example: Geometric Reasoning Task in PSL Format
+
+!psl v0.1
+context: geometric_reasoning
+goal: solve_arc_pattern
+constraints: [grid_size_preserved, colors_valid, pattern_consistent]
+
+[FACT]
+input_grid:
+  - [B, B, R]
+  - [B, R, B]
+  - [R, B, B]
+
+transformation_rule: "rotate_90_clockwise_then_invert_colors"
+
+expected_output:
+  - [R, B, R]
+  - [B, R, B]
+  - [B, B, R]
+
+[PLAN]
+- route_to: trm_agent
+- max_cycles: 8
+- apply_rule: rotate_90_clockwise
+- apply_rule: invert_colors
+- validate_constraints: all
+
+[EVIDENCE]
+intermediate_after_rotation:
+  - [R, B, B]
+  - [B, R, B]
+  - [R, B, B]
+
+final_after_inversion:
+  - [B, R, R]  # Initial attempt (may have errors)
+  - [R, B, R]
+  - [B, R, R]
+
+# Note: TRM would iteratively refine this through recursive cycles
+
+[CHECKLIST]
+- grid_size: 3x3 ✓
+- colors_valid: [R, B] only ✓
+- rotation_applied: ?
+- inversion_applied: ?
+- matches_expected: ?
 
