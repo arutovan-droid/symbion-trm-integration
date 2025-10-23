@@ -1,1 +1,68 @@
 
+# Example: TRM Response Format
+
+trm_response:
+  request_id: "req_geobench_001"
+  timestamp: "2025-01-18T10:30:00Z"
+  
+  input_summary:
+    task_type: "geometric_reasoning"
+    domain: "arc_agi_style"
+    max_cycles: 8
+  
+  solution:
+    y_final:
+      grid:
+        - [R, B, R]
+        - [B, R, B]
+        - [B, B, R]
+    
+    confidence: 0.95
+    
+  reasoning_trace:
+    - cycle: 0
+      y_state: "random_initialization"
+      z_latent: "zero_vector"
+      confidence: 0.1
+      
+    - cycle: 1
+      y_state: "partial_rotation_detected"
+      z_latent: "encoding_input_pattern"
+      confidence: 0.3
+      action: "applied_rotation_heuristic"
+      
+    - cycle: 2
+      y_state: "rotation_complete_inversion_partial"
+      z_latent: "refining_color_mapping"
+      confidence: 0.6
+      action: "corrected_color_inversion"
+      
+    - cycle: 3
+      y_state: "near_solution"
+      z_latent: "fine_tuning_edges"
+      confidence: 0.85
+      action: "adjusted_corner_pixels"
+      
+    - cycle: 4
+      y_state: "solution_candidate"
+      z_latent: "validation_mode"
+      confidence: 0.95
+      convergence: true
+      action: "final_verification"
+  
+  metadata:
+    cycles_used: 4
+    convergence_achieved: true
+    computation_cost_ms: 45
+    model_version: "trm_geobench_v0.1"
+    
+  validation:
+    constraints_satisfied:
+      - grid_size_preserved: true
+      - colors_valid: true
+      - pattern_consistent: true
+    
+    psl_checklist:
+      - rotation_applied: true
+      - inversion_applied: true
+      - matches_expected: true
