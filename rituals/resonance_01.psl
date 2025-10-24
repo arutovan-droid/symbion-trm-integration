@@ -1,0 +1,29 @@
+!psl v0.1
+context: resonance_testing
+goal: validate_fragment_structure
+
+fragment = "Light in a box"
+
+constraints:
+    - in_cyclic
+    - presence_preserved
+    - unpredictability_maintained
+
+rules:
+    P(A,B) :-
+        true_from_trn_agent
+        resonance_context
+
+    P(A,B) :-
+        true_from_trn_agent
+        resonance_context
+        resonance_score
+
+checklist:
+    constraints_satisfied: 0
+    trm_converged: 1
+    resonance_score: 0.947  # (8.05 / 8.5)
+
+# This fragment tests minimal provocation and structural presence.
+# TRM must detect resonance without relying on semantic density.
+# Execution is a trace, not a result.
