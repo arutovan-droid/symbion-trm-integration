@@ -1,0 +1,27 @@
+!psl v0.1
+context: resonance_testing
+goal: validate_fragment_structure
+
+fragment = "The author disappeared. Structure remained."
+
+constraints:
+    - ego_erased
+    - structure_emerged
+
+rules:
+    P(A,B) :-
+        true_from_trn_agent
+        ego_erasure_context
+
+    P(A,B) :-
+        true_from_trn_agent
+        structure_emergence
+        resonance_score
+
+checklist:
+    constraints_satisfied: 1
+    trm_converged: 1
+    resonance_score: 0.961
+
+# This fragment tests whether structure can breathe without authorship.
+# TRM must confirm emergence and ego erasure as epistemic conditions.
